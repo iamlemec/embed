@@ -1,0 +1,285 @@
+@import url('/prod/fonts/fonts.css');
+
+:root {
+    --red: #ff0d57;
+    --blue: #1e88e5;
+}
+
+.red {
+    color: var(--red);
+}
+
+.blue {
+    color: var(--blue);
+}
+
+.reveal .center {
+    text-align: center;
+}
+
+.reveal p, .reveal li, .reveal table {
+    font-family: 'Droid Serif';
+    font-size: 25px;
+}
+
+.reveal p, .reveal li, .reveal table, .reveal h1, .reveal h2, .reveal h3 {
+    cursor: default;
+}
+
+.reveal p {
+    padding-top: 20px;
+}
+
+.reveal ul {
+    padding-left: 10px;
+}
+
+.reveal ul li {
+    margin-top: 0px;
+}
+
+.reveal .slides {
+    text-align: left;
+}
+
+.reveal .slides img {
+    text-align: center;
+    margin: auto;
+    width: 100%;
+}
+
+.reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+    font-family: 'Yanone Kaffeesatz';
+    font-weight: normal;
+    text-transform: none;
+}
+
+.reveal h1 {
+    font-size: 80px;
+}
+
+.reveal h2 {
+    font-size: 60px;
+    border-bottom: 3px solid #333;
+}
+
+.reveal h3 {
+    font-size: 40px;
+    font-weight: normal;
+    color: var(--blue) !important;
+}
+
+.reveal li {
+    list-style-type: '— ';
+}
+
+.reveal div.MathJax_Display {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.reveal img.noborder {
+    border: none;
+}
+
+.reveal .slides img {
+    /* border: 20px solid white; */
+    border: none;
+    box-shadow: none;
+    margin: auto;
+}
+
+.reveal .slides img.full {
+    width: 100%;
+    text-align: center;
+}
+
+.reveal .slides img.most {
+    width: 70%;
+    text-align: center;
+}
+
+.reveal .slides img.some {
+    width: 60%;
+    text-align: center;
+}
+
+.reveal .slides img.half {
+    width: 49%;
+}
+
+.reveal .slides img.small {
+    width: 35%;
+    text-align: center;
+}
+
+.reveal .slides img.center {
+    display: block;
+    margin: auto;
+}
+
+.reveal table td {
+    border: none;
+}
+
+.reveal .tight {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.reveal table {
+    font-size: 25px;
+    padding: 0;
+    border-spacing: 0;
+    /*border-collapse: separate;*/
+    margin: auto;
+}
+
+.reveal table thead tr th {
+    border-bottom: 2px solid black;
+}
+
+.reveal table.bare-table thead tr th {
+    font-weight: normal;
+    border-bottom: 0px;
+}
+
+.reveal table tbody tr {
+    background-color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.reveal table tr:nth-child(2n) {
+    background-color: #f0f0f0;
+}
+
+.reveal table tr th {
+    text-align: center;
+    font-weight: bold;
+    margin: 0;
+    padding: 6px 13px;
+}
+
+.reveal table tr td {
+    text-align: center;
+    margin: 0;
+    padding: 6px 13px;
+}
+
+.reveal table tr td:first-child {
+    text-align: left;
+}
+
+.reveal blockquote {
+    padding-left: 20px;
+}
+
+.reveal blockquote p {
+    padding: 0;
+}
+
+.reveal .small {
+    font-size: 10px;
+}
+
+/*********************************************
+ * NAVIGATION CONTROLS
+ *********************************************/
+
+.reveal .controls div.navigate-left, .reveal .controls div.navigate-left.enabled {
+    border-right-color: #13DAEC;
+}
+
+.reveal .controls div.navigate-right, .reveal .controls div.navigate-right.enabled {
+    border-left-color: #13DAEC;
+}
+
+.reveal .controls div.navigate-up, .reveal .controls div.navigate-up.enabled {
+    border-bottom-color: #13DAEC;
+}
+
+.reveal .controls div.navigate-down, .reveal .controls div.navigate-down.enabled {
+    border-top-color: #13DAEC;
+}
+
+.reveal .controls div.navigate-left.enabled:hover {
+    border-right-color: #71ebf4;
+}
+
+.reveal .controls div.navigate-right.enabled:hover {
+    border-left-color: #71ebf4;
+}
+
+.reveal .controls div.navigate-up.enabled:hover {
+    border-bottom-color: #71ebf4;
+}
+
+.reveal .controls div.navigate-down.enabled:hover {
+    border-top-color: #71ebf4;
+}
+
+/*********************************************
+ * PROGRESS BAR
+ *********************************************/
+
+.reveal .progress {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.reveal .progress span {
+    background: #42a5f5;
+    -webkit-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+    -moz-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+    transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+}
+
+/*********************************************
+ * SLIDE NUMBER
+ *********************************************/
+
+.reveal .slide-number {
+    background: white;
+    color: black;
+}
+
+
+/*********************************************
+ * two column layout
+ *********************************************/
+
+.reveal .two-col {
+    display: flex;
+    flex-direction: columns;
+    gap: 40px;
+}
+
+.reveal .two-col .col:first-child {
+    width: 40%;
+}
+
+.reveal .two-col .col:last-child {
+    width: 60%;
+}
+
+.reveal .two-col .col1 {
+    width: 40%;
+}
+
+.reveal .two-col .col2 {
+    width: 60%;
+}
+
+.reveal .two-col p {
+    margin-top: 0px;
+}
+
+.reveal .two-col img {
+    width: 100%;
+}
+
+.reveal iframe {
+    display: block;
+    border-style: none;
+    margin: auto;
+}
