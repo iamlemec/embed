@@ -330,7 +330,7 @@ See the full notebook for more examples: [slides.ipynb](https://github.com/iamle
 
 You can run embeddings locally even if you don't have a fancy GPU. Huggingface has excellent Python libraries for 
 
-One of my favorite projects is `llama.cpp` which is a C++ implementation that keeps things fast and simple
+One of my favorite projects is [`llama.cpp`](https://github.com/ggerganov/llama.cpp) which is a C++ implementation that keeps things fast and simple
 ```python
 from llama_cpp import Llama
 model = Llama('bge-large-en-v1.5-f16.gguf', embedding=True)
@@ -342,15 +342,13 @@ The GGUF file contains all the model specifications and weights. You can find GG
 
 ## Text Generation with LLMs
 
-Of course, since they are the same architecture, you can do text generation with these same tools... but LLMs are much bigger models (see [slides.ipynb](https://github.com/iamlemec/embed/blob/main/code/slides.ipynb) for some generation examples)
-
-Outside of ChatGPT style interfaces, there are quite a few other LLM use cases:
+Of course, since they are the same architecture, you can do text generation with these same tools... but LLMs are much bigger models (see [slides.ipynb](https://github.com/iamlemec/embed/blob/main/code/slides.ipynb) for some generation examples). Still quite a few non-ChatGPT use cases:
 
 **Document annotation**: automatically classify or summarize documents on ingestion ("Does this document talk about X?")
 
-**OCR Correction**: correct OCR transcriptions, which are often noisy or garbled
+**Language translation**: use [SeamlessM4T](https://github.com/facebookresearch/seamless_communication) from Meta to do automatic translation/transcription/vocalization over 100s of languages
 
-**Voice transcription**: Use `whisper.cpp` to transcribe audio in real-time
+**Voice transcription**: use [`whisper.cpp`](https://github.com/ggerganov/whisper.cpp) to transcribe audio in real-time
 
 **Retrieval augmented generation**: combine embedding based retrieval with context aware LLMs
 
