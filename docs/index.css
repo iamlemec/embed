@@ -27,7 +27,7 @@
 }
 
 .reveal p {
-    padding-top: 20px;
+    padding-top: 10px;
 }
 
 .reveal ul {
@@ -35,7 +35,7 @@
 }
 
 .reveal ul li {
-    margin-top: 0px;
+    margin-top: 10px;
 }
 
 .reveal .slides {
@@ -282,4 +282,17 @@
     display: block;
     border-style: none;
     margin: auto;
+}
+
+/*********************************************
+ * code highlighting with highlight.js
+ *********************************************/
+
+.reveal pre {
+    box-shadow: none;
+    border: 1px solid #ddd;
+}
+
+.reveal pre code .hljs-built_in {
+    color: unset;
 }

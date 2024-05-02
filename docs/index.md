@@ -44,7 +44,7 @@ There have been massive advances in the capabilities of frontier machine learnin
 
 Transformers are the dominant class of large language model (LLM) today and are most notably used for ChatGPT and other models like LLaMa
 
-They have undergone massive improvements in architecture, training, and implementation since first proposed in 2017
+There have been large improvements in architecture, training, and implementation since first proposed in 2017
 
 The key component relative to standard neural networks is the **attention mechanism** which allows it to consider cross-word relationships with a relatively small number of parameters
 
@@ -74,12 +74,64 @@ Embedding models tend to be much lighter weight than generative models and so ca
 **Word frequency** (bag of words): identify relevant words (vocabulary) and produce a (very sparse) vector of counts/frequencies
 - A common embellishment is to re-weight word frequencies by how common the word is ([TF-IDF](https://en.wikipedia.org/wiki/Tf–idf))
 
-**Text embeddings**: a dimensionality reduction technique that converts words or documents into numerical representations
+**Text embeddings**: converts words or documents into numerical representations that capture their semantic meaning
 - Result is a high dimensional vector for each chunk of text (e.g. OpenAI offers models from 256 to 3072 dimensions)
 
 *Token*: the fundamental "word" unit, usually a word or part of a word <br/>
 *Sequence*: a list of tokens, like a sentence/paragraph/document <br/>
 *Corpus*: a collection of documents, usually from the same source
+
+---
+
+## Transformers: A Closer Look
+
+<script type="text/gum">
+ND = t => Node(t, {aspect: 1, padding: 0.5});
+TX = t => Place(Text(t), {aspect: 1, rad: [0.5, 0.15]});
+
+let data = [
+  [TX('the'), TX('quick'), TX('brown'), TX('fox')],
+  [ND('e'), ND('e'), ND('e'), ND('e')],
+  [ND('m'), ND('m'), ND('m'), ND('m')],
+  [ND('b'), ND('b'), ND('b'), ND('b')],
+  [ND('e'), ND('e'), ND('e'), ND('e')],
+  [ND('d'), ND('d'), ND('d'), ND('d')],
+]
+let activ0 = VStack(data.map(HStack));
+let activ = ['1', '2', 'N'].map(i => VStack([
+  activ0, Node(`Layer ${i}`, {border: 0, aspect: 2.5})
+]));
+
+let arrow = Arrow(0, {pos: [1, 0.5], tail: 1, aspect: 1});
+let shaft = Place(arrow, {aspect: 0.3, rad: 0.3});
+
+let dot = Circle({rad: 0.25, fill: '#ccc'});
+let etcet = Place(HStack([dot, dot, dot]), {aspect: 0.3});
+
+let input = Place(Text("\"the quick brown fox\""), {rad: [0.5, 0.1], aspect: 0.6});
+let output = Place(Text("\"jumps\""), {rad: [0.5, 0.1], aspect: 0.6});
+
+let horiz = HStack([
+  input, shaft,
+  activ[0], shaft,
+  activ[1], shaft,
+  etcet, shaft,
+  activ[2], shaft,
+  output,
+]);
+
+let frame = Frame(horiz, {margin: 0.02});
+let svg = SVG(frame, {size: 1000});
+return svg;
+</script>
+
+Computational steps for a single pass of a transformer model:
+
+- Tokenize input sequence and convert these into initial embeddings
+- Apply N layers iteratively, each with "feed foward" and "attention" steps
+- Use output from last token to synthesize a result (next word or embedding)
+
+Important that attention can handle inputs sequences of arbitrary length!
 
 ---
 
@@ -161,10 +213,10 @@ SP1 = Spacer({aspect: 1});
 SQ1 = Square();
 let data = [
   [...SP(7), TX('query'), ...SP(2), SP1],
-  [SP1, TX('dim1'), TX('dim2'), TX('dim3'), TX('dim4'), TX('dim5'), SP1, ND('e'), ...SP(2), SP1],
-  [TX('doc1'), ND('e'), ND('m'), ND('b'), ND('e'), ND('d'), SP1, ND('m'), SP1, ND('sim1'), SP1],
-  [TX('doc2'), ND('e'), ND('m'), ND('b'), ND('e'), ND('d'), TX('×'), ND('b'), TX('='), ND('sim2'), SP1],
-  [TX('doc3'), ND('e'), ND('m'), ND('b'), ND('e'), ND('d'), SP1, ND('e'), SP1, ND('sim3'), SP1],
+  [SP1, ...SP(5), SP1, ND('e'), ...SP(2), SP1],
+  [TX('doc 1'), ND('e'), ND('m'), ND('b'), ND('e'), ND('d'), SP1, ND('m'), SP1, ND('sim 1'), SP1],
+  [TX('doc 2'), ND('e'), ND('m'), ND('b'), ND('e'), ND('d'), TX('×'), ND('b'), TX('='), ND('sim 2'), SP1],
+  [TX('doc 3'), ND('e'), ND('m'), ND('b'), ND('e'), ND('d'), SP1, ND('e'), SP1, ND('sim 3'), SP1],
   [...SP(7), ND('d'), ...SP(2), SP1],
 ]
 let grid = VStack(data.map(row => HStack(row)));
@@ -185,7 +237,7 @@ One approach is to do "zero-shot" sentiment analysis by embedding a concept word
 
 ---
 
-## Embeddings Providers
+## Embedding Providers
 
 Many big players provide embedding APIs. Great because you can do it on almost any hardware
 
@@ -202,21 +254,22 @@ Many big players provide embedding APIs. Great because you can do it on almost a
 
 ## Open Source Embeddings
 
-[Huggingface](http://huggingface.co) is basically the GitHub of open-source ML models. Anything notable will find its way here
+[Huggingface](http://huggingface.co) is basically the GitHub of open-source ML models. Anything notable will find its way there
 
 - **BAAI/bge-\***: great workhorse models, small compute (fast)
-
 - **TaylorAI/bge-micro-v2**: super small with admirable performance
-
 - **nomic** / **jina**: large context models, medium compute
-
 - **GritLM** / **e5-mistral**: generative LLM based models, large compute
+
+*Issues with open source*:
+- Have to run it yourself or get someone to host it (software hassles, etc.)
+- You'll want some kind of GPU or Apple workstation to run at scale
 
 ---
 
 ## Performance Considerations
 
-Checkout the [MTEB leaderboard](https://huggingface.co/spaces/mteb/leaderboard). Also my [blog post](http://doughanley.com/blogs/?post=embed) Pareto frontier.
+Checkout the [MTEB leaderboard](https://huggingface.co/spaces/mteb/leaderboard). Also my [blog post](http://doughanley.com/blogs/?post=embed) on the Pareto frontier.
 <script type="text/gum" width="65%">
 let data = [
   {"Model":"all-MiniLM","Seqs":6064.483871,"Params":22.7,"MTEB":56.26,"xoff":0.0,"yoff":0.0,"font":12},
@@ -256,20 +309,89 @@ return frame;
 
 ## Embedding Tool Ecosystem
 
+Almost everything happens through Python in ML these days
+- and it's easier to learn than ever with ChatGPT and GitHub Copilot!
+
+Set your `OPENAI_API_KEY` and run the following to get the embedding for one or many strings (here we just do "hello world")
+```python
+from openai import OpenAI
+client = OpenAI(api_key=YOUR_API_KEY)
+result = client.embeddings.create(
+    input='hello world',
+    model='text-embedding-3-large'
+)
+result.data[0].embedding # yields a list of 3072 numbers
+```
+See the full notebook for more examples: [slides.ipynb](https://github.com/iamlemec/embed/blob/main/code/slides.ipynb)
+
+---
+
+## Running Embeddings Locally
+
+You can run embeddings locally even if you don't have a fancy GPU. Huggingface has excellent Python libraries for 
+
+One of my favorite projects is `llama.cpp` which is a C++ implementation that keeps things fast and simple
+```python
+from llama_cpp import Llama
+model = Llama('bge-large-en-v1.5-f16.gguf', embedding=True)
+model.embed('hello world') # yields a big list of numbers
+```
+The GGUF file contains all the model specifications and weights. You can find GGUFs for a few popular embedding models at [Compendium Labs](https://huggingface.co/CompendiumLabs)
+
+---
+
+## Text Generation with LLMs
+
+Of course, since they are the same architecture, you can do text generation with these same tools... but LLMs are much bigger models (see [slides.ipynb](https://github.com/iamlemec/embed/blob/main/code/slides.ipynb) for some generation examples)
+
+Outside of ChatGPT style interfaces, there are quite a few other LLM use cases:
+
+**Document annotation**: automatically classify or summarize documents on ingestion ("Does this document talk about X?")
+
+**OCR Correction**: correct OCR transcriptions, which are often noisy or garbled
+
+**Voice transcription**: Use `whisper.cpp` to transcribe audio in real-time
+
+**Retrieval augmented generation**: combine embedding based retrieval with context aware LLMs
+
+---
+
+## Multi-modal models (Text + Image)
+
+<div class="two-col">
+
+<div class="col2" data-markdown>
+
+**Image annotation**: [LlaVa](https://llava-vl.github.io/) can answer arbitrary questions about images
+
+![Llava Mono Lisa](images/llava_mona_lisa.png) <!-- .element: class="most" -->
+
+</div>
+
+<div class="col2" data-markdown>
+
+**Text extraction / OCR**: [surya](https://github.com/VikParuchuri/surya) is pushing beyond classic OCR tools
+
+![Surya NYT](images/surya_nyt.jpg) <!-- .element: class="full" -->
+
+</div>
+
+</div>
+
 ---
 
 <div class="two-col">
 
 <div class="col1">
 
-<br/><br/>
+<br/>
 
 **Text Embeddings** <br/>
 **A Practical Overview**
 
-Douglas Hanley
+[Douglas Hanley](http://doughanley.com)
 
-*University of Pittsburgh + Compendium Labs*
+*University of Pittsburgh + [Compendium Labs](http://compendiumlabs.ai)*
 
 <br/><br>
 

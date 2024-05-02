@@ -1,5 +1,6 @@
 import Reveal from '/prod/reveal.js/dist/reveal.esm.js';
 import Markdown from '/prod/reveal.js/plugin/markdown/markdown.esm.js';
+import Highlight from '/prod/reveal.js/plugin/highlight/highlight.esm.js';
 import { injectImages, injectScripts } from '/prod/gum.js/dist/js/gum.js';
 
 // katex config
@@ -85,7 +86,7 @@ function initSlides() {
         minScale: 0.1,
         margin: 0.1,
         transition: 'none',
-        plugins: [ Markdown ],
+        plugins: [ Markdown, Highlight ],
     });
 }
 
