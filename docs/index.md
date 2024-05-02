@@ -1,4 +1,4 @@
-# Text Embeddings
+# Text Embeddings + Generative AI
 ## A Practical Overview
 
 <br/>
@@ -386,7 +386,7 @@ Outside of ChatGPT style interfaces, there are quite a few other LLM use cases:
 
 <br/>
 
-**Text Embeddings** <br/>
+**Text Embeddings + Generative AI** <br/>
 **A Practical Overview**
 
 [Douglas Hanley](http://doughanley.com)
