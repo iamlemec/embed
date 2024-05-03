@@ -153,7 +153,7 @@ Let's get a more intuitive idea of what these embeddings express and how indicat
 
 We can also use **dimensionality reduction** techniques such as principle component analysis (PCA), t-SNE, or UMAP
 
-Here is a 2D UMAP representation of the OpenAI embeddings for every presidential inaugural $\rightarrow$
+On the right is a 2D UMAP representation of the OpenAI embeddings for every presidential inaugural speech
 
 </div>
 
@@ -306,9 +306,9 @@ One approach is to do "zero-shot" sentiment analysis by embedding a concept word
 
 Many big players provide embedding APIs. Great because you can do it on almost any hardware
 
-- **OpenAI**: Still great, has Matryoshka embeddings to reduce storage needs.
-- **Cohere**: Very cool 1-bit quantization reduces storage needs.
-- **Google**: Gecko models are competitive on performance metrics.
+- **OpenAI**: Still great, has Matryoshka embeddings to reduce storage needs
+- **Cohere**: Very cool 1-bit quantization reduces storage needs
+- **Google**: Gecko models are competitive on performance metrics
 
 *Issues with proprietary*:
 
@@ -393,9 +393,9 @@ See the full notebook for more examples: [slides.ipynb](https://github.com/iamle
 
 ## Running Embeddings Locally
 
-You can run embeddings locally even if you don't have a fancy GPU. Huggingface has excellent Python libraries for 
+You can run embeddings locally even if you don't have a fancy GPU. Huggingface has excellent Python libraries for embedding and generation
 
-One of my favorite projects is [`llama.cpp`](https://github.com/ggerganov/llama.cpp) which is a C++ implementation that keeps things fast and simple
+One of my favorite projects is [`llama.cpp`](https://github.com/ggerganov/llama.cpp) which is a C++ implementation that keeps things fast and simple (using Python bindings [`llama-cpp-python`](https://github.com/abetlen/llama-cpp-python))
 ```python
 from llama_cpp import Llama
 model = Llama('bge-large-en-v1.5-f16.gguf', embedding=True)
