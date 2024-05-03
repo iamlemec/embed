@@ -387,7 +387,7 @@ result = client.embeddings.create(
 )
 result.data[0].embedding # yields a list of 3072 numbers
 ```
-See the full notebook for more examples: [slides.ipynb](https://github.com/iamlemec/embed/blob/main/code/slides.ipynb)
+See the full notebook for more examples: [embed.ipynb](https://github.com/iamlemec/embed/blob/main/code/embed.ipynb)
 
 ---
 
@@ -407,7 +407,7 @@ The GGUF file contains all the model specifications and weights. You can find GG
 
 ## Text Generation with LLMs
 
-Of course, since they are the same architecture, you can do text generation with these same tools... but LLMs are much bigger models (see [slides.ipynb](https://github.com/iamlemec/embed/blob/main/code/slides.ipynb) for some generation examples). Still quite a few non-ChatGPT use cases:
+Of course, since they are the same architecture, you can do text generation with these same tools... but LLMs are much bigger models (see [embed.ipynb](https://github.com/iamlemec/embed/blob/main/code/embed.ipynb) for some generation examples). Still quite a few non-ChatGPT use cases:
 
 **Document annotation**: automatically classify or summarize documents on ingestion ("Does this document talk about X?")
 
