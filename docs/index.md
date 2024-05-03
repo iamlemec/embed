@@ -229,6 +229,71 @@ We can compute the similarity between embedded documents and a new query by doin
 
 ---
 
+## Capturing Semantic Meaning
+
+<div class="two-col">
+
+<div class="col2" data-markdown>
+
+<script type="text/gum" width="70%">
+SP = t => Spacer({aspect: 1});
+ND = (t, c) => Node(t, {aspect: 1, padding: [0, 1.0], text_stroke: c});
+TX = t => Node(t, {aspect: 1, padding: [0, 0.9], border: 0});
+let data = [
+  [SP()      , TX('dog') , TX('bark'), TX('tree')],
+  [TX('dog') , ND('100', 'gray'), ND('47', red), ND('37')],
+  [TX('bark'), ND('47', red), ND('100', 'gray'), ND('41')],
+  [TX('tree'), ND('37'), ND('41', red), ND('100', 'gray')],
+]
+let matrix = VStack(data.map(HStack));
+return Frame(matrix, {margin: [0.02, 0, 0, 0.1]});
+</script>
+
+Here's a simple example to see how well (OpenAI) embeddings capture semantic meaning
+- Each cell is the similarity between the row and column terms
+
+</div>
+
+<div class="col2" data-markdown>
+
+This type of similarity is called the **cosine similarity** because it ends up measuring the cosine of the angle between the two embedding vectors
+
+<script type="text/gum" width="80%">
+let thetas = [0.4, 1.3];
+let colors = [red, blue];
+let arcrad = 0.5;
+let locs = thetas.map(th => [cos(th), sin(th)]);
+let zero = Dot({pos: [0, 0], rad: 0.05});
+let circle = Circle({pos: [0, 0], rad: 1});
+let points = zip(locs, colors).map(([p, c]) => Circle({pos: p, rad: 0.05, stroke: c, fill: c}));
+let lines = zip(locs, colors).map(([p, c]) => Line([0, 0], p, {stroke: c}));
+let note1 = Note('\\theta', {pos: [0.2, 0.25], rad: 0.05, latex: true});
+let note2 = Note('doc 1', {pos: [1.2, 0.4], rad: 0.15});
+let note3 = Note('doc 2', {pos: [0.3, 1.15], rad: 0.15});
+let inset = Place(Frame(HStack([
+  Text('cos = '),
+  Graph(SymPath({fy: cos, xlim: [0, 2*pi]}), {aspect: 2})
+]), {border: 1, padding: 0.2}), {pos: [0.92, -1.25]});
+let arc = SymPath({
+  fx: th => arcrad*cos(th),
+  fy: th => arcrad*sin(th),
+  tlim: thetas
+});
+let p = Plot([circle, ...points, ...lines, zero, arc, note1, note2, note3, inset], {
+  xlim: [-1.5, 1.5], ylim: [-1.5, 1.5],
+  xticks: [-1, 0, 1], yticks: [-1, 0, 1],
+  xgrid: [-1.5, -1, -0.5, 0, 0.5, 1, 1.5],
+  ygrid: [-1.5, -1, -0.5, 0, 0.5, 1, 1.5],
+});
+return Frame(p, {margin: 0.1});
+</script>
+
+</div>
+
+</div>
+
+---
+
 ## Classification: Sentiment Analysis
 
 One approach is to do "zero-shot" sentiment analysis by embedding a concept word (here "fear") and comparing to your corpus documents
